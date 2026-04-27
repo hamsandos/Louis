@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Downtown Louisville — 30 Iconic Building Facades</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#C8A96E;--gold-light:#E8D5A8;--navy:#1A1F36;--cream:#F5F0E8;--accent:#D4756B;--text-primary:#F5F0E8;--text-muted:#9A9BB0;--card-bg:rgba(37,43,69,.6);--border:rgba(200,169,110,.2)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text-primary);overflow-x:hidden}
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 24px;background:radial-gradient(ellipse at 20% 50%,rgba(200,169,110,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(212,117,107,.06) 0%,transparent 50%),var(--navy)}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8A96E' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");opacity:.5}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border:1px solid var(--border);border-radius:50px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:40px;backdrop-filter:blur(10px);animation:fadeDown 1s ease}
+  .hero-badge span{width:6px;height:6px;background:var(--gold);border-radius:50%}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(42px,8vw,96px);font-weight:900;line-height:1.05;color:var(--cream);margin-bottom:20px;animation:fadeUp 1s ease .2s both}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero-sub{font-size:clamp(16px,2.5vw,22px);font-weight:300;color:var(--text-muted);max-width:600px;line-height:1.6;margin-bottom:50px;animation:fadeUp 1s ease .4s both}
+  .hero-stats{display:flex;gap:48px;animation:fadeUp 1s ease .6s both}
+  .stat{text-align:center}
+  .stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold)}
+  .stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:4px}
+  .scroll-line{position:absolute;bottom:40px;width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold));animation:pulse 2s ease infinite}
+  .section{padding:80px 24px;max-width:1400px;margin:0 auto}
+  .section-header{text-align:center;margin-bottom:60px}
+  .section-tag{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:700;color:var(--cream)}
+  .divider{width:60px;height:1px;background:var(--gold);margin:20px auto 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;padding:0 24px;max-width:1400px;margin:0 auto}
+  .card{position:relative;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:28px;backdrop-filter:blur(10px);transition:all .4s cubic-bezier(.25,.46,.45,.94)}
+  .card:hover{transform:translateY(-4px);border-color:rgba(200,169,110,.5);box-shadow:0 20px 60px rgba(0,0,0,.3),0 0 40px rgba(200,169,110,.05)}
+  .card-num{position:absolute;top:16px;right:20px;font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:rgba(200,169,110,.08);line-height:1}
+  .cat{display:inline-block;padding:4px 12px;border-radius:4px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+  .c1{background:rgba(200,169,110,.15);color:var(--gold)}.c2{background:rgba(212,117,107,.15);color:var(--accent)}.c3{background:rgba(100,180,160,.15);color:#64B4A0}.c4{background:rgba(140,130,200,.15);color:#8C82C8}.c5{background:rgba(200,180,140,.15);color:#C8B48C}.c6{background:rgba(120,160,200,.15);color:#78A0C8}.c7{background:rgba(180,120,80,.15);color:#B47850}.c8{background:rgba(160,160,160,.15);color:#A0A0A0}
+  .card-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);margin-bottom:6px;line-height:1.3}
+  .card-year{font-size:13px;color:var(--gold);font-weight:500;margin-bottom:12px}
+  .card-desc{font-size:14px;line-height:1.65;color:var(--text-muted)}
+  .card-style{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--gold-light);font-weight:500;letter-spacing:.5px}
+  .card-style::before{content:'◆ ';font-size:8px;vertical-align:middle}
+  .links{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+  .links a{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:500;text-decoration:none;transition:all .25s ease;border:1px solid var(--border);color:var(--gold-light);background:rgba(200,169,110,.06)}
+  .links a:hover{background:rgba(200,169,110,.18);border-color:var(--gold);color:var(--gold)}
+  .card.feat{grid-column:span 2;background:linear-gradient(135deg,rgba(200,169,110,.1),var(--card-bg));border-color:rgba(200,169,110,.35)}
+  footer{text-align:center;padding:60px 24px;border-top:1px solid var(--border);margin-top:40px}
+  footer p{font-size:13px;color:var(--text-muted)}
+  footer .fb{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);margin-bottom:8px}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+  @media(max-width:768px){.hero-stats{gap:28px}.grid{grid-template-columns:1fr}.card.feat{grid-column:span 1}.stat-num{font-size:28px}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-badge"><span></span> Architectural Heritage Guide</div>
+  <h1>Downtown<br><em>Louisville</em></h1>
+  <p class="hero-sub">30 iconic building facades around the Kentucky International Convention Center — a walking tour through two centuries of American architecture.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">30</div><div class="stat-label">Buildings</div></div>
+    <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Years of History</div></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">Architectural Styles</div></div>
+  </div>
+  <div class="scroll-line"></div>
+</section>
+
+<!-- ZONE 1 -->
+<section class="section"><div class="section-header"><div class="section-tag">Zone 1</div><div class="section-title">The Convention Center District</div><div class="divider"></div></div></section>
+<div class="grid">
+
+<div class="card feat"><div class="card-num">01</div><div class="cat c1">Landmark</div><div class="card-name">Kentucky International Convention Center</div><div class="card-year">Originally 1977 · Renovated 2018</div><div class="card-desc">The centerpiece of downtown Louisville, KICC underwent a $207 million renovation that transformed its facade into a sweeping curtain of glass and steel with angular geometric panels that shimmer at night.</div><div class="card-style">Contemporary Glass & Steel</div><div class="links">
+<a href="https://www.hok.com/projects/view/kentucky-international-convention-center/" target="_blank">📷 HOK Design Photos</a>
+<a href="https://en.wikipedia.org/wiki/Kentucky_International_Convention_Center" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Kentucky_International_Convention_Center" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=kentucky+international+convention+center" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Kentucky+International+Convention+Center/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.gotolouisville.com/directory/kentucky-international-convention-center-kicc/" target="_blank">🔗 GoToLouisville</a>
+</div></div>
+
+<div class="card"><div class="card-num">02</div><div class="cat c2">Hotel</div><div class="card-name">The Seelbach Hilton</div><div class="card-year">1905</div><div class="card-desc">A Bavarian-style masterpiece on Fourth Street with ornate limestone, arched windows, and terracotta. F. Scott Fitzgerald stayed here — it inspired the hotel in The Great Gatsby.</div><div class="card-style">Beaux-Arts / Bavarian Renaissance</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Seelbach_Hotel" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Seelbach_Hotel" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.loc.gov/item/2016813735" target="_blank">📷 Library of Congress</a>
+<a href="https://theclio.com/entry/4197" target="_blank">📖 Clio History</a>
+<a href="https://www.historichotels.org/us/hotels-resorts/the-seelbach-hilton-louisville/history.php" target="_blank">🏛️ Historic Hotels</a>
+<a href="https://www.google.com/maps/place/The+Seelbach+Hilton+Louisville/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">03</div><div class="cat c2">Hotel</div><div class="card-name">The Brown Hotel</div><div class="card-year">1923</div><div class="card-desc">Rising 16 stories on West Broadway, this Georgian Revival hotel has a grand brick and limestone facade. Birthplace of the legendary Hot Brown sandwich.</div><div class="card-style">Georgian Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/The_Brown_Hotel" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Brown_Hotel_(Louisville,_Kentucky)" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.historichotels.org/us/hotels-resorts/the-brown-hotel/" target="_blank">🏛️ Historic Hotels</a>
+<a href="https://www.flickr.com/search/?text=brown+hotel+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/The+Brown+Hotel/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.gotolouisville.com/directory/the-brown-hotel/" target="_blank">🔗 GoToLouisville</a>
+</div></div>
+
+<div class="card"><div class="card-num">04</div><div class="cat c4">Cultural</div><div class="card-name">Louisville Palace Theatre</div><div class="card-year">1928</div><div class="card-desc">A Spanish Baroque fantasy on South Fourth Street with terra-cotta facade, ornamental columns, medallions, and heraldic crests. The 2,700-seat interior resembles a Spanish courtyard.</div><div class="card-style">Spanish Baroque Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Palace_Theatre_(Louisville,_Kentucky)" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Louisville_Palace" target="_blank">🖼️ Wikimedia</a>
+<a href="https://theclio.com/entry/12886" target="_blank">📖 Clio History</a>
+<a href="https://www.flickr.com/search/?text=louisville+palace+theatre" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/The+Louisville+Palace/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.louisvillepalace.com/" target="_blank">🔗 Official Site</a>
+</div></div>
+
+<div class="card"><div class="card-num">05</div><div class="cat c3">Commercial</div><div class="card-name">Humana Building</div><div class="card-year">1985</div><div class="card-desc">Michael Graves' postmodern tower — one of the most celebrated 20th-century office buildings in America. Pink granite, cascading balconies, and dramatic loggia.</div><div class="card-style">Postmodern</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Humana_Building" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Humana_Building" target="_blank">🖼️ Wikimedia</a>
+<a href="https://michaelgraves.com/projects/the-humana-building/" target="_blank">📷 Michael Graves</a>
+<a href="https://www.flickr.com/search/?text=humana+building+louisville" target="_blank">📸 Flickr</a>
+<a href="https://sah-archipedia.org/buildings/KY-01-JF25" target="_blank">📖 SAH Archipedia</a>
+<a href="https://www.google.com/maps/place/Humana+Building/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">06</div><div class="cat c6">Government</div><div class="card-name">Louisville Metro Hall (City Hall)</div><div class="card-year">1873</div><div class="card-desc">Imposing Italianate civic building on Jefferson Street with a soaring clock tower, rusticated stone base, arched windows, and ornamental iron cresting.</div><div class="card-style">Italianate / Second Empire</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Louisville_City_Hall" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Louisville_City_Hall" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=louisville+city+hall+building" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Louisville+Metro+Hall/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">07</div><div class="cat c5">Sacred</div><div class="card-name">Cathedral of the Assumption</div><div class="card-year">1852</div><div class="card-desc">Louisville's oldest Catholic cathedral — stunning Neo-Gothic red brick with a towering spire, lancet windows, and a 24-foot rose window masterwork.</div><div class="card-style">Neo-Gothic Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Cathedral_of_the_Assumption_(Louisville,_Kentucky)" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Cathedral_of_the_Assumption_(Louisville)" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=cathedral+assumption+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Cathedral+of+the+Assumption/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+</div>
+
+<!-- ZONE 2 -->
+<section class="section"><div class="section-header"><div class="section-tag">Zone 2</div><div class="section-title">West Main Street & Museum Row</div><div class="divider"></div></div></section>
+<div class="grid">
+
+<div class="card"><div class="card-num">08</div><div class="cat c4">Cultural</div><div class="card-name">Louisville Slugger Museum & Factory</div><div class="card-year">1996</div><div class="card-desc">Unmistakable thanks to the 120-foot steel baseball bat leaning against its facade. Red brick and steel blending industrial heritage with modern exhibition design.</div><div class="card-style">Industrial Modern</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Louisville_Slugger_Museum_%26_Factory" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Louisville_Slugger_Museum" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=louisville+slugger+museum+bat" target="_blank">📸 Flickr</a>
+<a href="https://www.sluggermuseum.com/" target="_blank">🔗 Official Site</a>
+<a href="https://www.google.com/maps/place/Louisville+Slugger+Museum+%26+Factory/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.tripadvisor.com/Attraction_Review-g39604-d109015-Reviews-Louisville_Slugger_Museum_Factory-Louisville_Kentucky.html" target="_blank">⭐ TripAdvisor</a>
+</div></div>
+
+<div class="card"><div class="card-num">09</div><div class="cat c4">Cultural</div><div class="card-name">Frazier History Museum</div><div class="card-year">2004</div><div class="card-desc">Angular limestone and glass facade paying homage to the historic cast-iron district. Official starting point of the Kentucky Bourbon Trail.</div><div class="card-style">Contemporary Limestone</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Frazier_History_Museum" target="_blank">📖 Wikipedia</a>
+<a href="https://www.fraziermuseum.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=frazier+history+museum+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Frazier+History+Museum/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">10</div><div class="cat c2">Hotel</div><div class="card-name">21c Museum Hotel</div><div class="card-year">c. 1880s · Renovated 2006</div><div class="card-desc">Restored 19th-century warehouses transformed into contemporary art museum and boutique hotel. Preserved cast-iron storefronts beneath a modern glass rooftop.</div><div class="card-style">Cast Iron & Contemporary Adaptive Reuse</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/21c_Museum_Hotels" target="_blank">📖 Wikipedia</a>
+<a href="https://www.21cmuseumhotels.com/louisville/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=21c+museum+hotel+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/21c+Museum+Hotel+Louisville/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">11</div><div class="cat c1">Landmark</div><div class="card-name">Cast Iron District Facades (West Main St)</div><div class="card-year">1850s–1890s</div><div class="card-desc">The second-largest collection of cast-iron facade buildings in America after SoHo. Ornate Victorian fronts with Corinthian columns and decorative cornices.</div><div class="card-style">Victorian Cast Iron Commercial</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/West_Main_Street_(Louisville,_Kentucky)" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Main_Street,_600_and_700_Block_(Buildings),_Louisville,_Jefferson_County,_KY_HABS" target="_blank">🖼️ HABS Archive</a>
+<a href="https://www.flickr.com/search/?text=west+main+street+cast+iron+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/West+Main+Street,+Louisville,+KY/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">12</div><div class="cat c4">Cultural</div><div class="card-name">Muhammad Ali Center</div><div class="card-year">2005</div><div class="card-desc">Bold contemporary waterfront museum. Layered facade of perforated metal screens, colored glass, and concrete creating shifting patterns of light.</div><div class="card-style">Contemporary / Deconstructivist</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Muhammad_Ali_Center" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Muhammad_Ali_Center" target="_blank">🖼️ Wikimedia</a>
+<a href="https://alicenter.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=muhammad+ali+center+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Muhammad+Ali+Center/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.tripadvisor.com/Attraction_Review-g39604-d578498-Reviews-Muhammad_Ali_Center-Louisville_Kentucky.html" target="_blank">⭐ TripAdvisor</a>
+</div></div>
+
+<div class="card"><div class="card-num">13</div><div class="cat c4">Cultural</div><div class="card-name">Kentucky Science Center</div><div class="card-year">c. 1906 · Renovated</div><div class="card-desc">Originally the Interurban Railway terminal — Classical Revival with grand arched windows and smooth stone cladding, adaptively reused as a science museum.</div><div class="card-style">Classical Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Kentucky_Science_Center" target="_blank">📖 Wikipedia</a>
+<a href="https://kysciencecenter.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=kentucky+science+center+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Kentucky+Science+Center/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+</div>
+
+<!-- ZONE 3 -->
+<section class="section"><div class="section-header"><div class="section-tag">Zone 3</div><div class="section-title">Whiskey Row & Fourth Street Live!</div><div class="divider"></div></div></section>
+<div class="grid">
+
+<div class="card"><div class="card-num">14</div><div class="cat c7">Distillery</div><div class="card-name">Old Forester Distillery</div><div class="card-year">c. 1870s · Restored 2018</div><div class="card-desc">Crown jewel of Whiskey Row. Restored Italianate warehouse with arched windows, red-brick facade, and iron storefronts. A working distillery on Main Street.</div><div class="card-style">Italianate Commercial</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Old_Forester" target="_blank">📖 Wikipedia</a>
+<a href="https://www.oldforester.com/distillery/" target="_blank">🔗 Official Site</a>
+<a href="https://www.gotolouisville.com/directory/old-forester-distilling-co/" target="_blank">📷 GoToLouisville</a>
+<a href="https://www.flickr.com/search/?text=old+forester+distillery+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Old+Forester+Distilling+Co./" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.tripadvisor.com/Attraction_Review-g39604-d13446690-Reviews-Old_Forester_Distillery-Louisville_Kentucky.html" target="_blank">⭐ TripAdvisor</a>
+</div></div>
+
+<div class="card"><div class="card-num">15</div><div class="cat c7">Distillery</div><div class="card-name">Evan Williams Bourbon Experience</div><div class="card-year">c. 1880s · Restored 2013</div><div class="card-desc">Whiskey Row gem with ornamental brickwork, tall arched windows, and decorative pressed-metal cornice. Tells the story of Kentucky's first commercial distiller.</div><div class="card-style">Victorian Commercial</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Evan_Williams_(bourbon)" target="_blank">📖 Wikipedia</a>
+<a href="https://www.evanwilliams.com/visit-us.php" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=evan+williams+bourbon+experience+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Evan+Williams+Bourbon+Experience/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">16</div><div class="cat c7">Distillery</div><div class="card-name">Michter's Fort Nelson Distillery</div><div class="card-year">c. 1870s · Restored 2019</div><div class="card-desc">Beautifully restored gateway to Whiskey Row with elaborate cast-iron storefront, tall Victorian windows, and a rooftop bar with panoramic views.</div><div class="card-style">Victorian Italianate with Cast Iron</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Michter%27s" target="_blank">📖 Wikipedia</a>
+<a href="https://michters.com/fort-nelson/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=michters+fort+nelson+distillery+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Michter%27s+Fort+Nelson+Distillery/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">17</div><div class="cat c3">Commercial</div><div class="card-name">Fourth Street Live! Complex</div><div class="card-year">Various · Renovated 2004</div><div class="card-desc">Vibrant entertainment district preserving several historic facades with a covered pedestrian streetscape mixing restored 19th-century fronts with modern canopy.</div><div class="card-style">Mixed Historic & Contemporary</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Fourth_Street_Live!" target="_blank">📖 Wikipedia</a>
+<a href="https://www.4thstlive.com/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=fourth+street+live+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Fourth+Street+Live!/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">18</div><div class="cat c3">Commercial</div><div class="card-name">Starks Building</div><div class="card-year">1913</div><div class="card-desc">12-story Chicago School skyscraper on Fourth Street with white terra-cotta facade, large Chicago-style windows, and restrained classical ornament.</div><div class="card-style">Chicago School / Neoclassical</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Starks_Building" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Starks_Building_(Louisville,_Kentucky)" target="_blank">🖼️ Wikimedia</a>
+<a href="https://theclio.com/entry/84543" target="_blank">📖 Clio History</a>
+<a href="https://www.flickr.com/search/?text=starks+building+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Starks+Building/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+</div>
+
+<!-- ZONE 4 -->
+<section class="section"><div class="section-header"><div class="section-tag">Zone 4</div><div class="section-title">Civic Heart & Financial District</div><div class="divider"></div></div></section>
+<div class="grid">
+
+<div class="card"><div class="card-num">19</div><div class="cat c6">Government</div><div class="card-name">Jefferson County Courthouse</div><div class="card-year">1858</div><div class="card-desc">Monumental Greek Revival courthouse with Corinthian columns and a cast-iron dome. One of the finest antebellum courthouses remaining in the South.</div><div class="card-style">Greek Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Jefferson_County_Courthouse_(Louisville,_Kentucky)" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Jefferson_County_Courthouse_(Louisville,_Kentucky)" target="_blank">🖼️ Wikimedia</a>
+<a href="https://sah-archipedia.org/buildings/KY-01-JF4" target="_blank">📖 SAH Archipedia</a>
+<a href="https://www.flickr.com/search/?text=jefferson+county+courthouse+louisville+kentucky" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Jefferson+County+Courthouse/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">20</div><div class="cat c3">Commercial</div><div class="card-name">PNC Tower (formerly National City Tower)</div><div class="card-year">1972</div><div class="card-desc">At 40 stories, Louisville's tallest building for decades. Sleek modernist curtain-wall of dark glass and steel rising from a plaza on Fifth Street.</div><div class="card-style">International Style / Modernist</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/PNC_Tower_(Louisville)" target="_blank">📖 Wikipedia</a>
+<a href="https://www.flickr.com/search/?text=PNC+tower+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/PNC+Tower/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.emporis.com/buildings/118414/pnc-tower-louisville-ky-usa" target="_blank">🏗️ Emporis</a>
+</div></div>
+
+<div class="card"><div class="card-num">21</div><div class="cat c3">Commercial</div><div class="card-name">AEGON Center (now Meidinger Tower)</div><div class="card-year">1993</div><div class="card-desc">Striking 35-story postmodern tower by John Burgee with Philip Johnson. Pyramidal crown of reflective glass glows golden at sunset.</div><div class="card-style">Postmodern</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Meidinger_Tower" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Aegon_Center" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=aegon+center+meidinger+tower+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Meidinger+Tower/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">22</div><div class="cat c6">Government</div><div class="card-name">Gene Snyder U.S. Courthouse</div><div class="card-year">1932</div><div class="card-desc">Stately Art Deco federal building. Limestone facade with geometric reliefs, stylized eagles, and strong vertical lines.</div><div class="card-style">Art Deco / Stripped Classical</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Gene_Snyder_United_States_Courthouse_and_Custom_House" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Gene_Snyder_United_States_Courthouse" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=gene+snyder+courthouse+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Gene+Snyder+U.S.+Courthouse/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">23</div><div class="cat c3">Commercial</div><div class="card-name">Kentucky Home Life Building</div><div class="card-year">1912</div><div class="card-desc">Handsome early skyscraper on South Fifth with richly ornamented Beaux-Arts facade, terra-cotta cladding, oversized arched entrance.</div><div class="card-style">Beaux-Arts</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Kentucky_Home_Life_Building" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Kentucky_Home_Life_Building" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=kentucky+home+life+building+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Kentucky+Home+Life+Building/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+</div>
+
+<!-- ZONE 5 -->
+<section class="section"><div class="section-header"><div class="section-tag">Zone 5</div><div class="section-title">Waterfront, Landmarks & Beyond</div><div class="divider"></div></div></section>
+<div class="grid">
+
+<div class="card"><div class="card-num">24</div><div class="cat c1">Landmark</div><div class="card-name">Louisville Water Tower</div><div class="card-year">1860</div><div class="card-desc">The oldest ornamental water tower in the world. Elegant Corinthian column rises 169 feet. A National Historic Landmark.</div><div class="card-style">Classical Greek / Roman Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Louisville_Water_Tower" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Louisville_Water_Tower" target="_blank">🖼️ Wikimedia</a>
+<a href="https://louisvillewater.com/about-us/louisville-water-tower/" target="_blank">🔗 Official Page</a>
+<a href="https://www.flickr.com/search/?text=louisville+water+tower" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Louisville+Water+Tower/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">25</div><div class="cat c4">Cultural</div><div class="card-name">Louisville Memorial Auditorium</div><div class="card-year">1929</div><div class="card-desc">Grand Neoclassical auditorium. Imposing columned portico, symmetrical wings, and carved stone pediments honoring Kentucky's war veterans.</div><div class="card-style">Neoclassical Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Louisville_Memorial_Auditorium" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Louisville_Memorial_Auditorium" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=louisville+memorial+auditorium" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Louisville+Memorial+Auditorium/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">26</div><div class="cat c4">Cultural</div><div class="card-name">Thomas Edison House</div><div class="card-year">c. 1850</div><div class="card-desc">Modest shotgun duplex in Butchertown where young Thomas Edison lived as a telegraph operator. Louisville's vernacular 19th-century residential architecture.</div><div class="card-style">Vernacular Shotgun</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Thomas_Edison_House" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Thomas_Edison_House_(Louisville,_Kentucky)" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=thomas+edison+house+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Thomas+Edison+House/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">27</div><div class="cat c1">Landmark</div><div class="card-name">Big Four Bridge</div><div class="card-year">1895 · Converted 2013</div><div class="card-desc">Originally a railroad truss bridge across the Ohio River, now a beloved pedestrian walkway with LED lighting that transforms it into a glowing landmark at night.</div><div class="card-style">Steel Truss / Industrial Engineering</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Big_Four_Bridge" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Big_Four_Bridge" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=big+four+bridge+louisville+night" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Big+Four+Bridge/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.tripadvisor.com/Attraction_Review-g39604-d4349498-Reviews-Big_Four_Bridge-Louisville_Kentucky.html" target="_blank">⭐ TripAdvisor</a>
+</div></div>
+
+<div class="card"><div class="card-num">28</div><div class="cat c5">Sacred</div><div class="card-name">Christ Church Cathedral</div><div class="card-year">1824 (current 1894)</div><div class="card-desc">Louisville's Episcopal cathedral. English Gothic limestone facade with square tower, pointed arches, and beautiful tracery windows.</div><div class="card-style">English Gothic Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Christ_Church_Cathedral_(Louisville,_Kentucky)" target="_blank">📖 Wikipedia</a>
+<a href="https://www.ccclouisville.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=christ+church+cathedral+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Christ+Church+Cathedral/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">29</div><div class="cat c3">Commercial</div><div class="card-name">Louisville Free Public Library (Main Branch)</div><div class="card-year">1908</div><div class="card-desc">A Beaux-Arts jewel on York Street with Ionic columns, arched windows, and elaborate stone carvings. One of Louisville's finest Carnegie-era public buildings.</div><div class="card-style">Beaux-Arts Classical</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Louisville_Free_Public_Library" target="_blank">📖 Wikipedia</a>
+<a href="https://www.lfpl.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=louisville+free+public+library+main" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Louisville+Free+Public+Library+Main+Library/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card"><div class="card-num">30</div><div class="cat c8">Industrial</div><div class="card-name">Union Station (L&N Railroad Depot)</div><div class="card-year">1891</div><div class="card-desc">Magnificent Richardsonian Romanesque train station with massive rough-cut stone arches, a prominent clock tower, and deep shadowed arcades.</div><div class="card-style">Richardsonian Romanesque</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Union_Station_(Louisville)" target="_blank">📖 Wikipedia</a>
+<a href="https://commons.wikimedia.org/wiki/Category:Union_Station_(Louisville,_Kentucky)" target="_blank">🖼️ Wikimedia</a>
+<a href="https://www.flickr.com/search/?text=union+station+louisville+kentucky" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Union+Station,+Louisville,+KY/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+</div>
+
+<!-- LOCALS ONLY TOP 10 -->
+<section class="section" style="padding-bottom:20px">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--accent)">★ Locals Only ★</div>
+    <div class="section-title">The <em style="color:var(--accent);font-style:italic">Real</em> Louisville — 10 More</div>
+    <div class="divider" style="background:var(--accent)"></div>
+    <p style="max-width:700px;margin:24px auto 0;font-size:15px;color:var(--text-muted);line-height:1.7">These aren't on the tourist maps. They're the facades Louisville <em>lives</em> in — the buildings where locals eat, drink, create, argue about art, watch plays, and fall in love with their city all over again. No museum gift shops. No bourbon selfie stations. Just the buildings that make Louisville feel like home.</p>
+  </div>
+</section>
+
+<div class="grid">
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">31</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">Actors Theatre of Louisville (Bank of Louisville Building)</div><div class="card-year">1837 · Renovated 1972</div><div class="card-desc">One of the oldest surviving buildings in downtown Louisville — a tiny, perfect Greek Revival gem on West Main. Its modest stone columns and symmetrical facade hide one of America's most important regional theatres. Locals pack the annual Humana Festival of New American Plays every spring. This isn't a tourist stop; it's Louisville's creative heartbeat. The building whispers while the shows inside roar.</div><div class="card-style">Greek Revival</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Actors_Theatre_of_Louisville" target="_blank">📖 Wikipedia</a>
+<a href="https://www.actorstheatre.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=actors+theatre+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Actors+Theatre+of+Louisville/" target="_blank">🗺️ Google Maps</a>
+<a href="https://theclio.com/entry/12886" target="_blank">📖 Clio</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">32</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">Troll Pub Under the Bridge (L&N Railroad HQ)</div><div class="card-year">1877 · Reopened 2011</div><div class="card-desc">The subterranean remains of the old Louisville & Nashville Railroad headquarters, buried under Washington Street after the 1937 flood. Locals descend past Louie the 8½-foot troll into a cavernous stone cellar with original masonry walls. It was an artist colony in the '70s. Now it's where Louisville watches the Cards play, drinks bourbon old-fashioneds, and argues about who makes the best Hot Brown. The facade is literally underground — and that's the point.</div><div class="card-style">Romanesque Commercial / Subterranean</div><div class="links">
+<a href="https://www.trollpub.com/louisville/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=troll+pub+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Troll+Pub+Under+the+Bridge/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.yelp.com/biz/troll-pub-under-the-bridge-louisville" target="_blank">⭐ Yelp Photos</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">33</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">KMAC Museum (formerly Museum Plaza)</div><div class="card-year">c. 1890s · Renovated 2016</div><div class="card-desc">A restored Whiskey Row warehouse turned into Louisville's scrappy, adventurous contemporary art museum. The facade is understated brick with a sleek modern entry canopy — nothing showy, which is exactly the point. Inside, local artists get shown alongside international names. The rooftop bar is one of the best-kept secrets downtown. Louisvillians know this is where the real art lives, not behind velvet ropes.</div><div class="card-style">Victorian Commercial / Adaptive Reuse</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/KMAC_Museum" target="_blank">📖 Wikipedia</a>
+<a href="https://www.kmacmuseum.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=KMAC+museum+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/KMAC+Museum/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">34</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">Mayan Cafe Building (NuLu / East Market District)</div><div class="card-year">c. 1880s</div><div class="card-desc">A humble two-story brick storefront on East Market Street in NuLu — Louisville's arts district born from grit, not a developer's boardroom. Chef Bruce Ucán serves indigenous Yucatecan food with locally sourced ingredients inside. The facade is unassuming — faded brick, simple awning, small windows — but locals will tell you this is the most important restaurant building in the city. It represents what NuLu is: authentic, independent, rooted.</div><div class="card-style">Victorian Commercial Storefront</div><div class="links">
+<a href="https://www.mayancafe.com/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=mayan+cafe+nulu+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Mayan+Cafe/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.yelp.com/biz/mayan-cafe-louisville" target="_blank">⭐ Yelp Photos</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">35</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">Butchertown Grocery (Washington Street)</div><div class="card-year">c. 1860s · Renovated 2016</div><div class="card-desc">A Civil War-era corner grocery building in Butchertown — Louisville's oldest meatpacking neighborhood — now home to one of the best restaurants in Kentucky. The narrow brick facade with its painted signage and original transom windows is the kind of building you'd walk past if you didn't know. But locals know. The adjacent bakery's Cruffins draw lines on Saturday mornings. This building is Butchertown's renaissance in a single frame.</div><div class="card-style">Vernacular Commercial / Corner Store</div><div class="links">
+<a href="https://www.butchertowngrocery.com/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=butchertown+grocery+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Butchertown+Grocery/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.yelp.com/biz/butchertown-grocery-louisville" target="_blank">⭐ Yelp Photos</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">36</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">Garage Bar (NuLu Service Station)</div><div class="card-year">c. 1920s · Renovated 2012</div><div class="card-desc">A converted 1920s auto service station on Market Street in NuLu, with the original garage doors still intact — they roll up in warm weather so the inside and the patio become one space. Ping-pong tables, wood-fired pizza, local brews. The building doesn't try to be anything other than what it was, and that's why Louisville loves it. No pretense. Just good food in an honest old building with the doors wide open.</div><div class="card-style">Early 20th-Century Commercial / Adaptive Reuse</div><div class="links">
+<a href="https://www.garageonmarket.com/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=garage+bar+nulu+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Garage+Bar/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.yelp.com/biz/garage-bar-louisville" target="_blank">⭐ Yelp Photos</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">37</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">Copper & Kings Distillery (Butchertown)</div><div class="card-year">c. 1880s warehouse · Renovated 2014</div><div class="card-desc">In a city drowning in bourbon, Copper & Kings makes brandy — and that's the most Louisville thing imaginable. The old brick warehouse facade in Butchertown is topped by one of the best rooftop bars in the city, where locals gather for sunset views of downtown. The building's industrial bones — loading docks, heavy timber, iron hardware — are left exposed and proud. It's the rebel distillery in a conformist row.</div><div class="card-style">Industrial Warehouse / Adaptive Reuse</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Copper_%26_Kings" target="_blank">📖 Wikipedia</a>
+<a href="https://www.copperandkings.com/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=copper+kings+distillery+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Copper+%26+Kings+American+Brandy+Distillery/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">38</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">Roots 101 African American Museum</div><div class="card-year">c. 1860s · Renovated 2019</div><div class="card-desc">Housed in a quiet historic storefront on West Main Street, this small but deeply powerful museum tells the story of Black Louisville from the Middle Passage to today. The facade is modest brick with painted signage — easy to miss if you're rushing between the tourist museums. But locals know this is one of the most important buildings on the Row. It tells the story that the big museums often whisper.</div><div class="card-style">Victorian Commercial Storefront</div><div class="links">
+<a href="https://www.roots-101.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=roots+101+museum+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Roots+101+African+American+Museum/" target="_blank">🗺️ Google Maps</a>
+<a href="https://www.tripadvisor.com/Attraction_Review-g39604-d17737474-Reviews-Roots_101_African_American_Museum-Louisville_Kentucky.html" target="_blank">⭐ TripAdvisor</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">39</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">The Kentucky Center for the Performing Arts</div><div class="card-year">1983</div><div class="card-desc">It's not pretty in a classical sense — the angular brutalist-modern facade of glass and concrete on the riverfront is polarizing. But locals love it anyway because it's where Louisville <em>happens</em>: the ballet, the orchestra, Broadway tours, community theatre, school recitals. It's the living room of the city's performing arts scene, and the lobby views of the river at intermission are worth the ticket alone.</div><div class="card-style">Late Modernist / Brutalist</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Kentucky_Center_for_the_Performing_Arts" target="_blank">📖 Wikipedia</a>
+<a href="https://www.kentuckyperformingarts.org/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=kentucky+center+performing+arts+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/The+Kentucky+Center+for+the+Performing+Arts/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+<div class="card" style="border-left:3px solid var(--accent)"><div class="card-num">40</div><div class="cat" style="background:rgba(212,117,107,.2);color:var(--accent)">Locals' Icon</div><div class="card-name">Falls City Brewing Building (NuLu)</div><div class="card-year">c. 1905 · Revived 2010</div><div class="card-desc">Falls City was Louisville's beer before bourbon was cool again — the working-class lager that sponsored Friday night fish fries and little league teams. The original brewing heritage lives on in a restored industrial building in NuLu with exposed brick, steel trusses, and the old Falls City signage painted back on the exterior. Grabbing a can of Falls City on a hot afternoon while sitting on the patio is a Louisville rite of passage. The building is a love letter to the city's blue-collar soul.</div><div class="card-style">Industrial Brewery / Adaptive Reuse</div><div class="links">
+<a href="https://en.wikipedia.org/wiki/Falls_City_Brewing_Company" target="_blank">📖 Wikipedia</a>
+<a href="https://www.fallscitybeer.com/" target="_blank">🔗 Official Site</a>
+<a href="https://www.flickr.com/search/?text=falls+city+brewing+louisville" target="_blank">📸 Flickr</a>
+<a href="https://www.google.com/maps/place/Falls+City+Beer/" target="_blank">🗺️ Google Maps</a>
+</div></div>
+
+</div>
+
+<footer>
+  <div class="fb">Louisville Architectural Heritage</div>
+  <p>40 iconic facades in downtown Louisville, Kentucky — 30 landmark structures + 10 locals-only picks that capture the real soul of the city.<br>Click any link to view photos, history, and details for each building.</p>
+</footer>
+
+<script>
+  const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.style.opacity='1',e.target.style.transform='translateY(0)')})},{threshold:.1});
+  document.querySelectorAll('.card').forEach(c=>{c.style.opacity='0';c.style.transform='translateY(20px)';c.style.transition='opacity .6s ease,transform .6s ease';o.observe(c)});
+</script>
+
+</body>
+</html>
